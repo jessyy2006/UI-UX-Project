@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!-- comment -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    
+    
+    <!-- slider template --> 
+    <style>
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto; /* Center the container */
+        }
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: -25px; /* Adjust this value to position the labels */
+            width: 100%;
+        }
+        .label {
+            text-align: center;
+            width: 25%; /* 100% divided by number of labels */
+            position: relative;
+            left: 10%; /* Adjust left position if needed */
+        }
+    </style>
+    
+    <!-- multi-select button template --> 
+    <style>
+        .button-container {
+            display: flex;                /* Enable flexbox layout */
+            justify-content: center;      /* Center the buttons horizontally */
+            align-items: center;          /* Center the buttons vertically */
+            gap: 50px;                    /* Space between buttons */
+            padding: 20px;                /* Optional: Padding around the container */
+        }
+        .checkbox {
+            display: none;                /* Hide the default checkbox */
+        }
+        .button {
+            padding: 10px 20px;           /* Button padding */
+            font-size: 16px;              /* Button text size */
+            cursor: pointer;               /* Change cursor on hover */
+            border: none;                 /* Remove default border */
+            border-radius: 5px;          /* Rounded corners */
+            background-color: grey;    /* Button background color */
+            color: white;                  /* Button text color */
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+        .checkbox:checked + .button {
+            background-color: #388E3C;    /* Darker green when checked */
+        }
+    </style>
+</head>
+
+<body style="padding: 0; margin: 0">
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="color:black;text-align:center; padding-bottom: 20px;">1. Choose Season</h1>
+        
+        <!--SLIDER-->
+    
+        <div class="slider-container">
+            <div class="labels">
+                <div class="label">Winter</div>
+                <div class="label">Spring</div>
+                <div class="label">Summer</div>
+                <div class="label">Fall</div>
+            </div>
+            <input type="range" id="snapSlider" min="0" max="100" step="25" value="25" style="width: 100%;"
+        </div>
+        <p style="text-align: center;">Selected Season: <span id="sliderLabel">Low</span></p>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const slider = document.getElementById("snapSlider");
+                const output = document.getElementById("sliderLabel");
+
+                // Define labels for each slider position
+                const labels = ["Winter", "Spring", "Summer", "Fall"];
+
+               // Display the initial label based on the slider value
+                output.textContent = labels[(slider.value / 25) - 1]; //-1 so it starts at right index (0) for winter
+
+                // Update the label when the slider changes
+                slider.addEventListener("input", function() {
+                    output.textContent = labels[(this.value / 25) - 1];
+                });
+            });
+        </script>
+    </div>
+    <!--MULTI-SELECT BUTTONS-->
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="text-align:center">2. Choose Landscape</h1>
+        <h3 style="text-align:center">Select Multiple:</h3>
+        
+        <div class="button-container">
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Hills</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option2">
+                <span class="button">Clouds</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option3">
+                <span class="button">Grassland</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option4">
+                <span class="button">Rain</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Rivers</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Forests</span>
+            </label>
+            <!-- maybe put into seperate category-->
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Night</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Night</span>
+            </label>
+        </div>
+    </div>
+        
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="color:black;text-align:center; padding-bottom: 0px;">3. Choose Features</h1>
+        
+        <div class="button-container">
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Horses</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option2">
+                <span class="button">People</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option3">
+                <span class="button">Market</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option4">
+                <span class="button">Fountain</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Public Bath</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Well</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Aqueduct</span>
+            </label>
+            <label>
+                <input type="checkbox" class="checkbox" name="option" value="option1">
+                <span class="button">Temple</span>
+            </label>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jessica's draft site</title>
+    
+    <style>
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: -25px;
+            width: 100%;
+        }
+        .label {
+            text-align: center;
+            font-size: 18px;
+            width: 25%;
+            position: relative;
+            left: 10%;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .checkbox {
+            display: none;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: grey;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .checkbox:checked + .button {
+            background-color: #388E3C;
+        }
+        .center-button {
+            padding: 20px;
+            font-size: 24px;
+            width: 200px;
+            height: 40px;
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .center-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body style="padding: 0; margin: 0">
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="color:black;text-align:center; padding-bottom: 20px;">1. Choose Season</h1>
+        <div class="slider-container">
+            <div class="labels">
+                <div class="label">Winter</div>
+                <div class="label">Spring</div>
+                <div class="label">Summer</div>
+                <div class="label">Fall</div>
+            </div>
+            <input type="range" id="snapSlider" min="0" max="100" step="25" value="25" style="width: 100%;">
+        </div>
+        <p style="text-align: center; font-size: 18px">Selected Season: <span id="sliderLabel">Spring</span></p>
+    </div>
+
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="text-align:center">2. Choose Landscape</h1>
+        <h3 style="text-align:center">Select Multiple:</h3>
+        <div class="button-container" id="landscapeContainer">
+            <label><input type="checkbox" class="checkbox"><span class="button">Hills</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Clouds</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Grassland</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Rain</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Rivers</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Forests</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Night</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Day</span></label>
+        </div>
+    </div>
+    
+    <div style="background-color: #DCDCDC; height:200px; padding: 0; margin: 0; outline-color: black; outline-style: solid">
+        <h1 style="color:black;text-align:center; padding-bottom: 0px;">3. Choose Features</h1>
+        <div class="button-container" id="featuresContainer">
+            <label><input type="checkbox" class="checkbox"><span class="button">Horses</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">People</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Market</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Fountain</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Public Bath</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Well</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Aqueduct</span></label>
+            <label><input type="checkbox" class="checkbox"><span class="button">Temple</span></label>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="center-button" id="executeButton"><b>Execute</b></button>
+    </div>
+
+    <script>
+        // make global so doesnt just belong in the DOMContentLoaded listener
+        let selectedSeason, selectedLandscape, selectedFeatures;
+
+        // test code to get selections printed on console
+        document.addEventListener("DOMContentLoaded", function() {
+            const slider = document.getElementById("snapSlider");
+            const output = document.getElementById("sliderLabel");
+            const labels = ["Winter", "Spring", "Summer", "Fall"];
+            output.textContent = labels[(slider.value / 25) - 1];
+           
+            // update as slider chnages
+            slider.addEventListener("input", function() {
+                output.textContent = labels[(this.value / 25) - 1];
+            });
+
+        // updates the 3 vars that capture all 3 input types
+        document.getElementById("executeButton").addEventListener("click", function() {
+                selectedSeason = output.textContent;
+                selectedLandscape = [...document.querySelectorAll("#landscapeContainer input:checked")]
+                    .map(input => input.nextElementSibling.textContent);
+                selectedFeatures = [...document.querySelectorAll("#featuresContainer input:checked")]
+                    .map(input => input.nextElementSibling.textContent);
+                
+                // for debugging
+                console.log("Selected Season:", selectedSeason);
+                console.log("Selected Landscape:", selectedLandscape);
+                console.log("Selected Features:", selectedFeatures);
+            
+            // Call sendData to send the selections to the mock API
+            sendData();
+            });
+        });
+        
+       // Connect to mock API
+       async function sendData() {
+        const payload = { 
+            name: "Success", 
+            message: selectedSeason + "," + selectedLandscape + "," + selectedFeatures
+        };
+
+        try {
+            // Use JSONPlaceholder's /posts endpoint as a mock API
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            console.log('Mock API Response:', result);
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+       }
+
+    </script>
+</body>
+</html>
