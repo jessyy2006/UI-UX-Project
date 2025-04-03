@@ -1,12 +1,24 @@
-
 /* ======================
 FONTS & BASE STYLES 
 ====================== */
-@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Work+Sans:wght@400;500&display=swap');
 
+/* Colors */
+:root {
+  --background-color: #FAF2DA;
+  --primary-color:#af2932;
+  --secondary-color: #869460;
+  --accent-color: #4A503D;
+}
 /* Font Classes */
 .jacquard-24-regular {
   font-family: "Jacquard 24", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pixelify-sans {
+  font-family: "Pixelify Sans", system-ui;
+  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
@@ -24,7 +36,7 @@ html {
 }
 
 body {
-  background-color: rgb(239, 234, 224);
+  background-color: var(--background-color);
 }
 
 /* ======================
@@ -37,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-family: 'Jacquard 24';
-  color: #af2932;
+  color: var(--primary-color);
   font-weight: 500;
   font-size: 110px;
 
@@ -46,9 +58,16 @@ h1 {
   left: 0;            /* Pins to left */
   width: 100%;        /* Full width */
   text-align: center; /* Center text */
-  padding: 1rem;      /* Add breathing room */
+  padding-bottom: 20%;      /* Add breathing room */
   margin: 0;          /* Remove default margins */
   z-index: 10;        /* Ensures it stays above other content */
+}
+
+h2 {
+  font-family: 'Pixelify Sans';
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 30px;
 }
 
 h3 {
@@ -61,18 +80,53 @@ h4 {
   font-weight: 500;
 }
 
+/* Wildcards */
+.wildcard-container label { /* "label" targets each individual wildcard*/
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 20px; /* Spacing between wildcards */
+}
+
+.wildcard-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Hover effect */
+.wildcard-container label:hover {
+  opacity: 0.8;
+  transform: scale(1.05); /* Optional: slight grow effect */
+}
+
+/* Checked state styling */
+.wildcard-container input:checked + img {
+  outline: 3px solid #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+}
+
+.wildcard-container img {
+  width: 100%;              /* Make image fill the button */
+  height: 100%;             /* Maintain aspect ratio */
+  object-fit: contain;      /* Prevent distortion */
+}
+
 /* Execute Button */
 .exec-button {
   display: inline-block; /* Allows for width and height */
-  padding: 10px 5px; /* Add some padding */
+  padding: 5px 5px; /* Add some padding */
   background-color: transparent; /* Add a subtle background */
   border: none; /* Remove default button border */
   cursor: pointer; /* Change cursor to a pointer on hover */
-  border-radius: 30px; /* Round the corners */
+  transition: all 0.3s ease;
 }
 
 .exec-button:hover {
-  opacity: 0.8; /* Make the button slightly transparent on hover */
+  opacity: 0.8;
+  transform: scale(1.05); /* Optional: slight grow effect */
 }
 
 .exec-button img {
@@ -95,7 +149,7 @@ h4 {
 }
 .slider-container{
   gap: 1rem; /* Space between icons and slider */
-  padding: 1rem 0; /* Vertical padding for each slider container */
+  padding: 0.5rem 0; /* Vertical padding for each slider container */
 }
 input[type='range'] {
   -webkit-appearance: none;
@@ -115,7 +169,7 @@ input[type='range']::-moz-range-thumb {
 .range-style {
   width: 400px;
   height: 50px;
-  padding: 20px;
+  padding: 10px;
   background: #e0e0e0; /*slider color*/
   border-radius: 10px;
   box-shadow: -2px -2px 8px white, 2px 2px 8px rgba(0, 0, 0, 0.5); /*outer shadow on slider */ 

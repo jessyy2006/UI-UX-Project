@@ -7,12 +7,9 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Icon Imports (CHANGE TO BE PIXELATED) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!-- Font imports -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Jacquard+24&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jacquard+24&family=Pixelify+Sans:wght@400..700&display=swap');
     </style>
 
 </head>
@@ -23,21 +20,19 @@
         
         <input type="range" class="range-style" min="0" max="100">
         
-        <img class="icons" src="assets/love.png" alt="heart img" style="width:90px; height:90px;">
+        <img class="icons" src="assets/love.png" alt="heart img" style="width:90px; height:90px;">       
+    </div>
+
+    <div class="slider-container">
         
+        <input type="range" class="range-style" min="0" max="100">
+             
     </div>
 
     <div class="slider-container">
         
         <input type="range" class="range-style" min="0" max="100">
         
-        
-    </div>
-
-    <div class="slider-container">
-        
-        <input type="range" class="range-style" min="0" max="100">
-        
     </div>
 
     <div class="slider-container">
@@ -45,25 +40,40 @@
         <input type="range" class="range-style" min="0" max="100">
 
     </div>
+    
+    <h2>Pick Your Poison</h2>
+    <!-- wildcards -->
+    <div class="wildcard-container">
+        <label id = "wildcard1">
+            <input type="checkbox">
+            <img src="assets/wildcard.png" alt="Wildcard Image" style="width:90px; height:90px;">
+        </label>
 
-    <!-- Execute Button (Temp = WILL CHANGE) -->
-    <button id = "execBtn" class="exec-button">
-        <img src="assets/start-up.png" alt="Button Image" style="width:200px; height:100px;">
-    </button>
+        <label id = "wildcard2">
+            <input type="checkbox">
+            <img src="assets/wildcard.png" alt="Wildcard Image" style="width:90px; height:90px;">
+        </label>
 
+        <label id = "wildcard3">
+            <input type="checkbox">
+            <img src="assets/wildcard.png" alt="Wildcard Image" style="width:90px; height:90px;">
+        </label>
+
+        <label id = "wildcard4">
+            <input type="checkbox">
+            <img src="assets/wildcard.png" alt="Wildcard Image" style="width:90px; height:90px;">
+        </label>
+    </div>
+
+    <!-- Execute Button (Temp = WILL update color palette) -->
+    <div style="padding: 20px">
+        <button id = "execBtn" class="exec-button">
+            <img src="assets/start-up.png" alt="Button Image" style="width:200px; height:100px;">
+        </button>
+    </div>
 
     <!-- Import JS -->
     <script src="script.js"></script>
 
-    <!-- Add this SVG filter definition (place it anywhere in your HTML) -->
-    <svg width="0" height="0" style="position: absolute;">
-        <filter id="pixelate" x="0" y="0">
-        <feFlood width="4" height="4" x="0" y="0" />
-        <feComposite width="4" height="4" />
-        <feTile result="a" />
-        <feComposite in="SourceGraphic" in2="a" operator="in" />
-        <feMorphology operator="dilate" radius="1" />
-        </filter>
-    </svg>
 </body>
 </html>
