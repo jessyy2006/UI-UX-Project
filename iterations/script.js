@@ -23,38 +23,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("All slider values:", sliderValues);
         generatePrompt();
         sendPrompt();
-        // Prepare the payload with all slider values
-        // const payload = {
-        //     name: "Success",
-        //     message: sliderValues // Combine all values with commas. THESE ARE WEIGHTS, maybe put in array for easier access?
-        // };
-
-        // Send data to mock API
-        // sendData(payload);
-
 
     });
 });
 
-// // Connect to mock API
-// async function sendData(payload) {
-//     try {
-//         const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-//             method: 'POST',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify(payload)
-//         });
-
-//         const result = await response.json();
-//         console.log('Mock API Response:', result);
-        
-//         // Optional: Show success message to user
-//         alert("Data sent successfully! Check console for details.");
-//     } catch (error) {
-//         console.error('Error sending data:', error);
-//         alert("Error sending data. Please try again.");
-//     }
-// }
 
 // Connect to ComfyUI
 let wildcard1 = " glue,";
