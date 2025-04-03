@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle execute button click
     executeBtn.addEventListener("click", function() {
         console.log("All slider values:", sliderValues);
-        
+        generatePrompt();
+        sendPrompt();
         // Prepare the payload with all slider values
         // const payload = {
         //     name: "Success",
@@ -80,7 +81,7 @@ function generatePrompt() {
     //     Style
     //     Modifiers
     dynamicPrompt =
-        "A colorful abstract image with (love:" + sliderValues[0] + ")" + "(nature:" + sliderValues[1] + ")" + "(sharp edges:" + sliderValues[2] + ")" + "(chaos:" + sliderValues[3] + ")" 
+        "An arrangement of objects with" + sliderValues[0] + ")" + "(nature:" + sliderValues[1] + ")" + "(sharp edges:" + sliderValues[2] + ")" + "(chaos:" + sliderValues[3] + ")";
         wildcards[getRandomInt(0, 4)];
     return dynamicPrompt;
 }
