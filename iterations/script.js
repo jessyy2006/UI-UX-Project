@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // Connect to ComfyUI
+// MAKE WILDCARDS FUN
 let wildcard1 = " glue,";
 let wildcard2 = " soil,";
 let wildcard3 = " fur,";
