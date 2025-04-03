@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-// Connect to ComfyUI
+// Wildcard selection
 // MAKE WILDCARDS FUN
 let wildcard1 = " glue,";
 let wildcard2 = " soil,";
@@ -36,14 +35,9 @@ let wildcard3 = " fur,";
 let wildcard4 = " miso,";
 let wildcard5 = " leather,";
 const wildcards = [wildcard1, wildcard2, wildcard3, wildcard4, wildcard5];
-let dynamicPrompt = "";
-let dynamicSeed = 1;
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// Connect to ComfyUI
+let dynamicPrompt = "";
 
 function generatePrompt() {
     // add my slider inputs here
@@ -55,7 +49,7 @@ function generatePrompt() {
     //     Modifiers
     dynamicPrompt =
         "An arrangement of objects with" + sliderValues[0] + ")" + "(nature:" + sliderValues[1] + ")" + "(sharp edges:" + sliderValues[2] + ")" + "(chaos:" + sliderValues[3] + ")";
-        wildcards[getRandomInt(0, 4)];
+        wildcards[0]; // update so it's the one that's selected
     return dynamicPrompt;
 }
 

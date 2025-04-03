@@ -44,7 +44,7 @@ body {
   ====================== */
 /* Reset heading margins */
 h1, h2, h3, h4, h5, h6 {
-  margin: 1;
+  margin: 0;
 }
 
 h1 {
@@ -53,21 +53,21 @@ h1 {
   font-weight: 500;
   font-size: 110px;
 
-  position: absolute;  /* Removes from normal flow */
-  top: 0;             /* Pins to top */
-  left: 0;            /* Pins to left */
-  width: 100%;        /* Full width */
-  text-align: center; /* Center text */
-  padding-bottom: 20%;      /* Add breathing room */
-  margin: 0;          /* Remove default margins */
-  z-index: 10;        /* Ensures it stays above other content */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;           
+  text-align: center;
+  padding-bottom: 20%; /* Breathing room (adjust as needed) */
+  z-index: 10;        /* Only if overlapping other elements */
 }
 
 h2 {
   font-family: 'Pixelify Sans';
   color: var(--primary-color);
   font-weight: 700;
-  font-size: 30px;
+  font-size: 40px;
+  margin-top: 20px;
 }
 
 h3 {
@@ -89,7 +89,7 @@ h4 {
   margin: 20px; /* Spacing between wildcards */
 }
 
-.wildcard-container input[type="checkbox"] {
+.wildcard-container input[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
@@ -99,19 +99,21 @@ h4 {
 /* Hover effect */
 .wildcard-container label:hover {
   opacity: 0.8;
-  transform: scale(1.05); /* Optional: slight grow effect */
+  transform: scale(1.05);
+  transform-origin: center; 
 }
 
 /* Checked state styling */
 .wildcard-container input:checked + img {
-  outline: 3px solid #4CAF50;
-  box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+  filter: brightness(0.8);
+  transform: scale(1.2); 
+  transform-origin: center;
 }
 
 .wildcard-container img {
-  width: 100%;              /* Make image fill the button */
-  height: 100%;             /* Maintain aspect ratio */
-  object-fit: contain;      /* Prevent distortion */
+  width: 100%;              
+  height: 100%;             
+  object-fit: contain;      
 }
 
 /* Execute Button */
