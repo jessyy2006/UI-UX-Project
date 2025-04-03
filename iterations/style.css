@@ -5,8 +5,8 @@ FONTS & BASE STYLES
 @import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Work+Sans:wght@400;500&display=swap');
 
 /* Font Classes */
-.fascinate-inline-regular {
-  font-family: "Fascinate Inline", system-ui;
+.jacquard-24-regular {
+  font-family: "Jacquard 24", system-ui;
   font-weight: 400;
   font-style: normal;
 }
@@ -36,10 +36,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-family: 'Fascinate Inline', system-ui;
+  font-family: 'Jacquard 24';
   color: #bd2f38;
   font-weight: 500;
-  font-size: 80px;
+  font-size: 110px;
 
   position: absolute;  /* Removes from normal flow */
   top: 0;             /* Pins to top */
@@ -61,17 +61,30 @@ h4 {
   font-weight: 500;
 }
 
-/* Percentage suffix */
-h4:after {
-  content: "%";
-  padding-left: 1px;
+/* Execute Button */
+.exec-button {
+  display: inline-block; /* Allows for width and height */
+  padding: 10px 5px; /* Add some padding */
+  background-color: transparent; /* Add a subtle background */
+  border: none; /* Remove default button border */
+  cursor: pointer; /* Change cursor to a pointer on hover */
+  border-radius: 30px; /* Round the corners */
 }
 
+.exec-button:hover {
+  opacity: 0.8; /* Make the button slightly transparent on hover */
+}
+
+.exec-button img {
+  width: 100%;              /* Make image fill the button */
+  height: 100%;             /* Maintain aspect ratio */
+  object-fit: contain;      /* Prevent distortion */
+}
 
 /* Icons */
 .fa-solid{
   font-size: 3em;
-  color: rgb(188, 0, 0);
+  color: rgb(182, 10, 10);
   position: relative;
   top: 0%;
   transform: translateY(-20%);
