@@ -54,5 +54,16 @@
 
     <!-- Import JS -->
     <script src="script.js"></script>
+
+    <!-- Add this SVG filter definition (place it anywhere in your HTML) -->
+    <svg width="0" height="0" style="position: absolute;">
+        <filter id="pixelate" x="0" y="0">
+        <feFlood width="4" height="4" x="0" y="0" />
+        <feComposite width="4" height="4" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology operator="dilate" radius="1" />
+        </filter>
+    </svg>
 </body>
 </html>

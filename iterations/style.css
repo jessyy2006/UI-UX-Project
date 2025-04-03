@@ -121,6 +121,8 @@ input[type='range']::-moz-range-thumb {
   background: #e0e0e0; /*slider color*/
   border-radius: 10px;
   box-shadow: -2px -2px 8px white, 2px 2px 8px rgba(0, 0, 0, 0.5); /*outer shadow on slider */ 
+  filter: url(#pixelate); /* ADDED, doesn't WORKS*/
+
 }
 
 /* webkit = chrome */
