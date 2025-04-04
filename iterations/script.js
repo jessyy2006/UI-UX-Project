@@ -1,16 +1,20 @@
 // Slider
-let sliderValues = [];
+let sliderValues = [50, 50, 50, 50];
 
 document.addEventListener("DOMContentLoaded", function() {
     const sliders = document.querySelectorAll(".range-style");
     const executeBtn = document.getElementById("execBtn");
-    
+
     // Initialize slider values array
     sliders.forEach((slider, index) => {
+        // to debug
+        console.log(`Initializing slider ${index}`);
         sliderValues[index] = slider.value;
         
         // Update value when slider changes
         slider.addEventListener("input", function() {
+            // debug
+            console.log(`Slider ${index} moved to ${this.value}`);
             sliderValues[index] = this.value / 100;
                 // scale 1-100 down to 0.5-1.5 later: \(y=\frac{x}{99}+\frac{97}{198}\) 
 
@@ -21,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle execute button click
     executeBtn.addEventListener("click", function() {
         console.log("All slider values:", sliderValues);
-        generatePrompt();
         sendPrompt();
 
     });
@@ -35,7 +38,7 @@ let wildcard3 = " fur,";
 let wildcard4 = " miso,";
 let wildcard5 = " leather,";
 const wildcards = [wildcard1, wildcard2, wildcard3, wildcard4, wildcard5];
-
+const dynamicSeed = 0;
 // Connect to ComfyUI
 let dynamicPrompt = "";
 
@@ -54,9 +57,6 @@ function generatePrompt() {
 }
 
 async function sendPrompt() {
-    
-    dynamicSeed = getRandomInt(1, 100000);
-    
     dynamicPrompt = generatePrompt();
     console.log(dynamicSeed);
     console.log(dynamicPrompt + dynamicSeed);
