@@ -20,23 +20,89 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle execute button click
     executeBtn.addEventListener("click", function() {
+        // 1. Store references to the button and status text element
         const button = this;
         const statusText = document.querySelector('.exec-status-text');
+    
+        // 2. Clear any existing timeouts to prevent multiple animations
+        if (window.statusTextTimeout) clearTimeout(window.statusTextTimeout);
+        if (window.intermediateTimeout) clearTimeout(window.intermediateTimeout);
+    
+        // 3. Set initial visual states
+        button.classList.add('loading'); // Visual effects
+        button.disabled = true; // Prevent double-clicks
+        statusText.style.display = 'block'; // Make text visible
+        statusText.textContent = "PREPARING FOR LAUNCH"; // Initial message
+        statusText.className = 'exec-status-text visible typewriter'; // Apply animations
+    
+        // 4. First text update after 5 seconds
+        window.intermediateTimeout = setTimeout(() => {
+            statusText.textContent = "GENERATING CONTENT";
+            statusText.classList.remove('typewriter'); // Remove typing animation
+        }, 5000);
+    
+        // 5. Final update after 20 seconds
+        window.statusTextTimeout = setTimeout(() => {
+            // Clear any pending intermediate update
+            clearTimeout(window.intermediateTimeout);
+            
+            // Update to final message
+            statusText.textContent = "PROCESS COMPLETE!";
+            statusText.classList.remove('typewriter'); // Ensure no typing animation
+            
+            // After 2 more seconds, fade out and reset
+            setTimeout(() => {
+                statusText.classList.remove('visible'); // Start fade out
+                setTimeout(() => {
+                    statusText.style.display = 'none'; // Hide completely
+                    button.classList.remove('loading', 'glitch-active');
+                    button.disabled = false; // Re-enable button
 
-        // Add glitch class immediately
-        button.classList.add('loading');
-        statusText.style.display = 'block';
-        statusText.textContent = "PREPARING FOR LAUNCH";
-        setTimeout(() => statusText.classList.add('visible'), 20);
+                    // 1. First make button fly up
+                    button.style.transition = 'transform 5s ease-in-out';
+                    button.style.transform = 'translateY(-100vh)';
 
-        // make sure text disappears after 20
-        
-        // Disable button during processing
-        button.disabled = true;
+                }, 500); // Wait for fade transition
+            }, 2000); // Show "COMPLETE" for 2 seconds
+        }, 20000);
+
+
+
+        // ------------------------------------------
+        // // Simulate backend call (NEED TO UPDATE)
+        // fetch('/your-api-endpoint')
+        // .then(response => response.json())
+        // .then(data => {
+        //     clearTimeout(firstChange); // Cancel intermediate text if still pending
+            
+        //     // Update text on completion
+        //     statusText.textContent = "PROCESS COMPLETE!";
+        //     statusText.classList.add('typewriter'); // Re-trigger animation
+            
+        //     // Set timeout to disappear after 20 seconds from click
+        //     window.statusTextTimeout = setTimeout(() => {
+        //     statusText.classList.remove('visible');
+        //     setTimeout(() => {
+        //         statusText.style.display = 'none';
+        //         button.classList.remove('glitch-active', 'enlarged');
+        //     }, 500); // Match transition duration
+        //     }, 20000); // 20 seconds total
+        // })
+        // .catch(error => {
+        //     statusText.textContent = "ERROR! RETRY?";
+        //     button.classList.remove('glitch-active');
+        //     // Still disappear after 20 seconds
+        //     window.statusTextTimeout = setTimeout(() => {
+        //     statusText.classList.remove('visible');
+        //     setTimeout(() => statusText.style.display = 'none', 500);
+        //     }, 20000);
+        // });
         
         // debug:
         console.log("All slider values:", sliderValues);
         sendPrompt();
+
+       
 
     });
 });

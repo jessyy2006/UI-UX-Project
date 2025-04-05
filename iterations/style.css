@@ -35,6 +35,20 @@ EFFECTS
   80% { transform: translate(3px, -3px); }
   100% { transform: translate(0); }
 }
+
+@keyframes pixel-bounce {
+  0% { transform: translateY(0) }
+  100% { transform: translateY(-5px) }
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-color) }
+}
+
 /* ======================
   CORE LAYOUT 
   ====================== */
@@ -54,13 +68,13 @@ body {
 }
 
 .content {
-  background-color: rgba(255, 237, 205, 0.4); /* Lighter overlay */
+  background-color: rgba(255, 237, 205, 0.4); /* overlay */
   padding: 20px;
   
   /* Blur effect */
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px); /* For Safari */
-  /* Positioning */
+  
   position: relative;
   height: 100vh;
   box-sizing: border-box;
@@ -111,11 +125,54 @@ h4 {
   font-weight: 700;
 }
 
-/* Style for the H3 status text */
 .exec-status-text {
-  display: none; /* Start hidden */
+  /* Centering and layout */
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  
+  /* Initial hidden state */
+  opacity: 0;
+  transform: translateY(10px);
+  
+  
+  /* Transitions */
+  transition: 
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
 }
 
+/* Visible State - removes initial hidden state */
+.exec-status-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+  
+  /* Shared animations when visible*/
+  animation: 
+    pixel-bounce 0.5s 40 alternate,
+    typing 10s steps(50, end),
+    blink-caret 1s step-end infinite;
+  
+}
+
+.exec-status-text:not(.visible) {
+  opacity: 0;
+}
+
+/* Typewriter-specific styles */
+.exec-status-text.typewriter {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+/* ======================
+  ELEMENTS
+  ====================== */
+/* Reset heading margins */
 
 /* Wildcards */
 .wildcard-container label { /* "label" targets each individual wildcard*/
@@ -167,11 +224,9 @@ h4 {
 }
 /* Glitch animation styles */
 .exec-button.loading { 
-  animation: glitch 0.3s linear 20; 
+  animation: glitch 1s linear 20 both; 
   /* have the animation set to 20 sec rn, will have to time the loading period */
 }
-
-
 
 .exec-button img {
   width: 100%;              /* Make image fill the button */
