@@ -7,14 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Initialize slider values array
     sliders.forEach((slider, index) => {
-        // to debug
-        console.log(`Initializing slider ${index}`);
         sliderValues[index] = slider.value;
         
         // Update value when slider changes
         slider.addEventListener("input", function() {
-            // debug
-            console.log(`Slider ${index} moved to ${this.value}`);
             sliderValues[index] = this.value / 100;
                 // scale 1-100 down to 0.5-1.5 later: \(y=\frac{x}{99}+\frac{97}{198}\) 
 
@@ -24,6 +20,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle execute button click
     executeBtn.addEventListener("click", function() {
+        const button = this;
+        const statusText = document.querySelector('.exec-status-text');
+
+        // Add glitch class immediately
+        button.classList.add('loading');
+        statusText.style.display = 'block';
+        statusText.textContent = "PREPARING FOR LAUNCH";
+        setTimeout(() => statusText.classList.add('visible'), 20);
+
+        // make sure text disappears after 20
+        
+        // Disable button during processing
+        button.disabled = true;
+        
+        // debug:
         console.log("All slider values:", sliderValues);
         sendPrompt();
 

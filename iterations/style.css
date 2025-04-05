@@ -8,6 +8,7 @@ FONTS & BASE STYLES
   --primary-color:#af2932;
   --secondary-color: #869460;
   --accent-color: #4A503D;
+  --text-shadow-color: #4c1623;
 }
 /* Font Classes */
 .jacquard-24-regular {
@@ -24,6 +25,17 @@ FONTS & BASE STYLES
 }
 
 /* ======================
+EFFECTS
+====================== */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 3px); }
+  40% { transform: translate(-3px, -3px); }
+  60% { transform: translate(3px, 3px); }
+  80% { transform: translate(3px, -3px); }
+  100% { transform: translate(0); }
+}
+/* ======================
   CORE LAYOUT 
   ====================== */
 html {
@@ -36,9 +48,23 @@ html {
 }
 
 body {
-  background-color: var(--background-color);
+  margin: 0;
+  background: url('assets/bg-gif.gif') center/cover no-repeat fixed;
+  height: 100vh;
 }
 
+.content {
+  background-color: rgba(255, 237, 205, 0.4); /* Lighter overlay */
+  padding: 20px;
+  
+  /* Blur effect */
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px); /* For Safari */
+  /* Positioning */
+  position: relative;
+  height: 100vh;
+  box-sizing: border-box;
+}
 /* ======================
   TYPOGRAPHY 
   ====================== */
@@ -49,6 +75,9 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-family: 'Jacquard 24';
+  text-shadow: 
+    3px 3px 0 var(--text-shadow-color) ;
+
   color: var(--primary-color);
   font-weight: 500;
   font-size: 110px;
@@ -61,10 +90,13 @@ h1 {
 
 h2 {
   font-family: 'Pixelify Sans';
+  text-shadow: 
+    3px 3px 0 var(--text-shadow-color);  
+    
   color: var(--primary-color);
   font-weight: 700;
   font-size: 40px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 h3 {
@@ -74,9 +106,16 @@ h3 {
 }
 
 h4 {
-  color: #999;
-  font-weight: 500;
+  font-family: 'Pixelify Sans';
+  color: var(--primary-color);
+  font-weight: 700;
 }
+
+/* Style for the H3 status text */
+.exec-status-text {
+  display: none; /* Start hidden */
+}
+
 
 /* Wildcards */
 .wildcard-container label { /* "label" targets each individual wildcard*/
@@ -96,8 +135,7 @@ h4 {
 
 /* Hover effect */
 .wildcard-container label:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
+  transform: scale(1.1);
   transform-origin: center; 
 }
 
@@ -125,9 +163,15 @@ h4 {
 }
 
 .exec-button:hover {
-  opacity: 0.8;
-  transform: scale(1.05); /* Optional: slight grow effect */
+  transform: scale(1.1); 
 }
+/* Glitch animation styles */
+.exec-button.loading { 
+  animation: glitch 0.3s linear 20; 
+  /* have the animation set to 20 sec rn, will have to time the loading period */
+}
+
+
 
 .exec-button img {
   width: 100%;              /* Make image fill the button */
@@ -168,6 +212,10 @@ input[type='range']::-moz-range-thumb {
   border: none;
 }
 
+.range-style::-webkit-slider-thumb:hover {
+  transform: scale(1.10);
+
+}
 .range-style::-webkit-slider-thumb:active {
   transform: scale(1.20);
   background: var(--primary-color);
