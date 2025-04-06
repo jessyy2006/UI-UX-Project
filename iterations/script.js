@@ -1,24 +1,37 @@
-// Slider
-let sliderValues = [50, 50, 50, 50];
+// Function Declarations
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  // Slider
+let sliderValues = [0.5, 0.5, 0.5, 0.5];
+let dynamicSeed = getRandomInt(0, 100000);
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const sliders = document.querySelectorAll(".range-style");
     const executeBtn = document.getElementById("execBtn");
 
+    sliderValues = [0.5, 0.5, 0.5, 0.5];
+
     // Initialize slider values array
     sliders.forEach((slider, index) => {
         sliderValues[index] = slider.value;
         
+        if (sliderValues[index] == 50) {
+            sliderValues[index] = 0.5;
+        }
         // Update value when slider changes
         slider.addEventListener("input", function() {
-            sliderValues[index] = this.value / 100;
-                // scale 1-100 down to 0.5-1.5 later: \(y=\frac{x}{99}+\frac{97}{198}\) 
+            sliderValues[index] = ((this.value / 100) * 4) -2; // range of -2 to 2
 
             console.log(`Slider ${index + 1} value: ${this.value}`);
         });
     });
 
-    // Handle execute button click
+    // execute button click
     executeBtn.addEventListener("click", function() {
         // 1. Store references to the button and status text element
         const button = this;
@@ -61,39 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 500); // Wait for fade transition
             }, 2000); // Show "COMPLETE" for 2 seconds
         }, 20000);
-
-        // ------------------------------------------
-        // // Simulate backend call (NEED TO UPDATE)
-        // fetch('/your-api-endpoint')
-        // .then(response => response.json())
-        // .then(data => {
-        //     clearTimeout(firstChange); // Cancel intermediate text if still pending
-            
-        //     // Update text on completion
-        //     statusText.textContent = "PROCESS COMPLETE!";
-        //     statusText.classList.add('typewriter'); // Re-trigger animation
-            
-        //     // Set timeout to disappear after 20 seconds from click
-        //     window.statusTextTimeout = setTimeout(() => {
-        //     statusText.classList.remove('visible');
-        //     setTimeout(() => {
-        //         statusText.style.display = 'none';
-        //         button.classList.remove('glitch-active', 'enlarged');
-        //     }, 500); // Match transition duration
-        //     }, 20000); // 20 seconds total
-        // })
-        // .catch(error => {
-        //     statusText.textContent = "ERROR! RETRY?";
-        //     button.classList.remove('glitch-active');
-        //     // Still disappear after 20 seconds
-        //     window.statusTextTimeout = setTimeout(() => {
-        //     statusText.classList.remove('visible');
-        //     setTimeout(() => statusText.style.display = 'none', 500);
-        //     }, 20000);
-        // });
         
         // debug:
         console.log("All slider values:", sliderValues);
+
         sendPrompt();
 
        
@@ -101,12 +85,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Wildcard selection
-let chosen_value = "";
 
-// Connect to ComfyUI
-let dynamicPrompt = "";
-let dynamicSeed = getRandomInt(1, 100);
+// Wildcard selection
+let chosen_value = "An arrangement of objects ";
 
 document.querySelector('.wildcard-container').addEventListener('change', function(event) {
     if (event.target.type === 'radio' && event.target.checked) {
@@ -117,7 +98,11 @@ document.querySelector('.wildcard-container').addEventListener('change', functio
             chosen_value: event.target.value
         });
     }
+
 });
+
+// Connect to ComfyUI
+let dynamicPrompt = "";
 
 function generatePrompt() {
     // add my slider inputs here
@@ -127,14 +112,17 @@ function generatePrompt() {
     //     Environment/Background
     //     Style
     //     Modifiers
+    dynamicSeed = getRandomInt(0, 100000);
     dynamicPrompt =
-        chosen_value + "with the following characteristics = (romantic:" + sliderValues[0] + ")" + ", (natural flora and fauna:" + sliderValues[1] + "), " + "(very sharp lines:" + sliderValues[2] + "), " + "(fun and chaotic:" + sliderValues[3] + ")";
+        chosen_value + "with the following characteristics = (romantic:" + sliderValues[0] + ")" + ", (natural plants:" + sliderValues[1] + "), " + "(very sharp lines:" + sliderValues[2] + "), " + "(fun and chaotic:" + sliderValues[3] + ")";
     return dynamicPrompt;
 }
 
 async function sendPrompt() {
     dynamicPrompt = generatePrompt();
     console.log(dynamicPrompt);
+    console.log("Seed value: " + dynamicSeed);
+
     
     const prompt = {
         3: {
@@ -239,3 +227,4 @@ async function sendPrompt() {
         console.error("Error sending prompt:", error);
     }
 }
+

@@ -69,10 +69,10 @@ body {
 
 .content {
   background-color: rgba(255, 237, 205, 0.4); /* overlay */
-  padding: 20px;
+  padding: 0px;
   
   position: relative;
-  height: 100vh;
+  height: 200vh;
   box-sizing: border-box;
 }
 
@@ -107,7 +107,7 @@ h2 {
   color: var(--primary-color);
   font-weight: 700;
   font-size: 40px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 h3 {
@@ -127,7 +127,6 @@ h4 {
   display: inline-block;
   margin: 0 auto;
   text-align: center;
-  padding: 10px 0;
   position: relative;
   
   /* Initial hidden state */
@@ -176,11 +175,13 @@ h4 {
   display: inline-block;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 20px; /* Spacing between wildcards */
+  padding-top: 10px;
+  padding-left: 13px;
+  padding-right: 25px;
 }
 
 .wildcard-container input[type="radio"] {
-  position: absolute;
+  position: relative;
   opacity: 0;
   width: 0;
   height: 0;
@@ -208,7 +209,7 @@ h4 {
 /* Execute Button */
 .exec-button {
   display: inline-block; /* Allows for width and height */
-  padding: 5px 5px; /* Add some padding */
+  padding: 10px 0px; /* Add some padding */
   background-color: transparent; /* Add a subtle background */
   border: none; /* Remove default button border */
   cursor: pointer; /* Change cursor to a pointer on hover */
@@ -244,8 +245,8 @@ h4 {
   box-sizing: border-box;
 }
 .slider-container{
-  gap: 1 rem; /* Space between icons and slider */
-  padding: 0.1 rem 0; /* Vertical padding for each slider container */
+  gap: 1rem; /* Space between icons and slider */
+  padding: 0; /* Vertical padding for each slider container */
 }
 input[type='range'] {
   -webkit-appearance: none;
@@ -297,7 +298,7 @@ input[type='range']::-moz-range-thumb {
 .range-style::-webkit-slider-thumb {
   position: relative;
   cursor: pointer;
-  top: -130%;
+  top: -150%;
   width: 40px;
   height: 40px;
   background-color: #869460; 
@@ -305,7 +306,6 @@ input[type='range']::-moz-range-thumb {
   border-radius: 50%;
   box-shadow: -1px -1px 2px #adbf7d, 1px 1px 2px #707c4f;
   transition: transform 0.2s ease;
-
 }
 
 /* moz -> for firefox! */
@@ -318,7 +318,7 @@ input[type='range']::-moz-range-thumb {
 }
 .range-style::-moz-range-thumb {
   position: relative;
-  top: -50%;
+  top: -60%;
   width: 40px;
   height: 40px;
   background-color: #e0e0e0;
