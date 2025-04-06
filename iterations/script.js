@@ -57,16 +57,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     statusText.style.display = 'none'; // Hide completely
                     button.classList.remove('loading', 'glitch-active');
                     button.disabled = false; // Re-enable button
-
-                    // 1. First make button fly up
-                    button.style.transition = 'transform 5s ease-in-out';
-                    button.style.transform = 'translateY(-100vh)';
-
                 }, 500); // Wait for fade transition
+                button.style.transition = 'transform 5s ease-in-out';
+                button.style.transform = 'translateY(-100vh)';
+                // setTimeout(() => {
+                //     button.style.transform = 'translateY(100vh)'; // Start below screen
+                //     setTimeout(() => {
+                //         button.style.transition = 'transform 0.5s ease-in-out';
+                //         button.style.transform = 'translateY(0)';
+                        
+                //         // 3. Final cleanup after animation completes
+                //         setTimeout(() => {
+                //             statusText.style.display = 'none';
+                //             resetButtonState();
+                //         }, 500); // Wait for return animation to finish
+                //     }, 50); // Short delay before returning
+                // }, 500); // Wait for fly-up to complete
+
             }, 2000); // Show "COMPLETE" for 2 seconds
         }, 20000);
 
-
+        resetButtonState();
 
         // ------------------------------------------
         // // Simulate backend call (NEED TO UPDATE)
