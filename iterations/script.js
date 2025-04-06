@@ -106,7 +106,7 @@ let chosen_value = "";
 
 // Connect to ComfyUI
 let dynamicPrompt = "";
-let dynamicSeed = 0;
+let dynamicSeed = getRandomInt(1, 100);
 
 document.querySelector('.wildcard-container').addEventListener('change', function(event) {
     if (event.target.type === 'radio' && event.target.checked) {
