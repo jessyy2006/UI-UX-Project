@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             statusText.textContent = "PROCESS COMPLETE!";
             statusText.classList.remove('typewriter'); // Ensure no typing animation
             
+
             // After 2 more seconds, fade out and reset
             setTimeout(() => {
                 statusText.classList.remove('visible'); // Start fade out
@@ -58,26 +59,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     button.classList.remove('loading', 'glitch-active');
                     button.disabled = false; // Re-enable button
                 }, 500); // Wait for fade transition
-                button.style.transition = 'transform 5s ease-in-out';
-                button.style.transform = 'translateY(-100vh)';
-                // setTimeout(() => {
-                //     button.style.transform = 'translateY(100vh)'; // Start below screen
-                //     setTimeout(() => {
-                //         button.style.transition = 'transform 0.5s ease-in-out';
-                //         button.style.transform = 'translateY(0)';
-                        
-                //         // 3. Final cleanup after animation completes
-                //         setTimeout(() => {
-                //             statusText.style.display = 'none';
-                //             resetButtonState();
-                //         }, 500); // Wait for return animation to finish
-                //     }, 50); // Short delay before returning
-                // }, 500); // Wait for fly-up to complete
-
             }, 2000); // Show "COMPLETE" for 2 seconds
         }, 20000);
-
-        resetButtonState();
 
         // ------------------------------------------
         // // Simulate backend call (NEED TO UPDATE)
@@ -119,16 +102,22 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Wildcard selection
-// MAKE WILDCARDS FUN
-let wildcard1 = " glue,";
-let wildcard2 = " soil,";
-let wildcard3 = " fur,";
-let wildcard4 = " miso,";
-let wildcard5 = " leather,";
-const wildcards = [wildcard1, wildcard2, wildcard3, wildcard4, wildcard5];
-const dynamicSeed = 0;
+let chosen_value = "";
+
 // Connect to ComfyUI
 let dynamicPrompt = "";
+let dynamicSeed = 0;
+
+document.querySelector('.wildcard-container').addEventListener('change', function(event) {
+    if (event.target.type === 'radio' && event.target.checked) {
+        const label = event.target.closest('label');
+        chosen_value = event.target.value;
+        dynamicSeed = label.id; 
+        console.log("Selected:", {
+            chosen_value: event.target.value
+        });
+    }
+});
 
 function generatePrompt() {
     // add my slider inputs here
@@ -139,20 +128,18 @@ function generatePrompt() {
     //     Style
     //     Modifiers
     dynamicPrompt =
-        "An arrangement of objects with" + sliderValues[0] + ")" + "(nature:" + sliderValues[1] + ")" + "(sharp edges:" + sliderValues[2] + ")" + "(chaos:" + sliderValues[3] + ")";
-        wildcards[0]; // update so it's the one that's selected
+        chosen_value + "with the following characteristics = (love:" + sliderValues[0] + ")" + ", (nature:" + sliderValues[1] + "), " + "(sharp edges:" + sliderValues[2] + "), " + "(chaos:" + sliderValues[3] + ")";
     return dynamicPrompt;
 }
 
 async function sendPrompt() {
     dynamicPrompt = generatePrompt();
-    console.log(dynamicSeed);
-    console.log(dynamicPrompt + dynamicSeed);
+    console.log(dynamicPrompt);
     
     const prompt = {
         3: {
             inputs: {
-                seed: dynamicSeed,
+                seed: dynamicSeed, // UPDATE = NO MORE DYANMIC SEED? i just subbed w label of radio id but idk if that makes sense?
                 steps: 20,
                 cfg: 8,
                 sampler_name: "euler",

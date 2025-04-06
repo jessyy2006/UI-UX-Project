@@ -71,14 +71,11 @@ body {
   background-color: rgba(255, 237, 205, 0.4); /* overlay */
   padding: 20px;
   
-  /* Blur effect */
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px); /* For Safari */
-  
   position: relative;
   height: 100vh;
   box-sizing: border-box;
 }
+
 /* ======================
   TYPOGRAPHY 
   ====================== */
@@ -168,7 +165,6 @@ h4 {
   white-space: nowrap;
 }
 
-
 /* ======================
   ELEMENTS
   ====================== */
@@ -216,7 +212,8 @@ h4 {
   background-color: transparent; /* Add a subtle background */
   border: none; /* Remove default button border */
   cursor: pointer; /* Change cursor to a pointer on hover */
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
 }
 
 .exec-button:hover {
