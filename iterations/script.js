@@ -128,7 +128,7 @@ function generatePrompt() {
     //     Style
     //     Modifiers
     dynamicPrompt =
-        chosen_value + "with the following characteristics = (love:" + sliderValues[0] + ")" + ", (nature:" + sliderValues[1] + "), " + "(sharp edges:" + sliderValues[2] + "), " + "(chaos:" + sliderValues[3] + ")";
+        chosen_value + "with the following characteristics = (romantic:" + sliderValues[0] + ")" + ", (natural flora and fauna:" + sliderValues[1] + "), " + "(very sharp lines:" + sliderValues[2] + "), " + "(fun and chaotic:" + sliderValues[3] + ")";
     return dynamicPrompt;
 }
 
