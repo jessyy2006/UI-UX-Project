@@ -73,15 +73,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     button.disabled = false; // Re-enable button
                 }, 500); // Wait for fade transition
             }, 2000); // Show "COMPLETE" for 2 seconds
-        }, 20000);
+        }, 15000);
         
         // debug:
         console.log("All slider values:", sliderValues);
 
         sendPrompt();
-
-       
-
     });
 });
 

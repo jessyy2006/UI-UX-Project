@@ -11,17 +11,19 @@ FONTS & BASE STYLES
   --text-shadow-color: #4c1623;
 }
 /* Font Classes */
-.jacquard-24-regular {
-  font-family: "Jacquard 24", system-ui;
-  font-weight: 400;
+@font-face {
+  font-family: 'Pixelify Sans';
+  font-optical-sizing: auto;
+  font-weight: 500;
   font-style: normal;
+  src: url(assets/Jacquard_24,Pixelify_Sans/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf) format('truetype');
 }
 
-.pixelify-sans {
-  font-family: "Pixelify Sans", system-ui;
-  font-optical-sizing: auto;
+@font-face {
+  font-family: 'Jacquard 24';
   font-weight: 400;
   font-style: normal;
+  src: url(assets/Jacquard_24,Pixelify_Sans/Jacquard_24/Jacquard24-Regular.ttf) format('truetype');
 }
 
 /* ======================
@@ -128,7 +130,8 @@ h4 {
   margin: 0 auto;
   text-align: center;
   position: relative;
-  
+  font-weight: 1000;
+
   /* Initial hidden state */
   opacity: 0;
   transform: translateY(10px);
@@ -147,7 +150,7 @@ h4 {
   
   /* Shared animations when visible*/
   animation: 
-    pixel-bounce 0.5s 40 alternate,
+    pixel-bounce 0.5s 30 alternate,
     typing 10s steps(50, end),
     blink-caret 1s step-end infinite;
   
@@ -222,7 +225,7 @@ h4 {
 }
 /* Glitch animation styles */
 .exec-button.loading { 
-  animation: glitch 1s linear 20 both; 
+  animation: glitch 1s linear 15 both; 
   /* have the animation set to 20 sec rn, will have to time the loading period */
 }
 
